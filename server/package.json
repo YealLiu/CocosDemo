@@ -1,0 +1,23 @@
+{
+  "name": "qimeng-pvp-server",
+  "version": "1.0.0",
+  "description": "启蒙游戏PVP对战服务器",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "ws": "^8.16.0",
+    "uuid": "^9.0.1",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "jest": "^29.7.0"
+  },
+  "keywords": ["game", "pvp", "websocket", "card-game"],
+  "author": "⚙️后端大牛",
+  "license": "MIT"
+}

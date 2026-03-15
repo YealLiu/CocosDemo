@@ -1,0 +1,18 @@
+{
+  "excludedModules": [],
+  "includeModules": [
+    "base",
+    "gfx-webgl",
+    "gfx-webgl2",
+    "ui",
+    "tween",
+    "terrain",
+    "particle",
+    "physics-cannon",
+    "physics-framework"
+  ],
+  "startScene": "db://assets/scenes/MenuScene.scene",
+  "title": "启蒙 - Roguelike卡牌",
+  "platform": "web-mobile",
+  "debug": false
+}
