@@ -1,0 +1,13 @@
+{
+  "name": "qimeng-demo-cocos",
+  "version": "1.0.0",
+  "description": "启蒙游戏 - Cocos Creator 项目",
+  "main": "index.js",
+  "scripts": {
+    "build:android": "cocos compile -p android --android-studio",
+    "build:web": "cocos compile -p web"
+  },
+  "keywords": ["cocos", "game", "android"],
+  "author": "Enlightenment Team",
+  "license": "MIT"
+}

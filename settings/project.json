@@ -1,0 +1,11 @@
+{
+  "deviceOrientation": "portrait",
+  "showFPS": false,
+  "frameRate": 60,
+  "id": "GameCanvas",
+  "renderMode": 2,
+  "debugMode": 1,
+  "exportScene": true,
+  "previewHeight": 800,
+  "previewWidth": 450
+}
