@@ -1,362 +1,353 @@
 {
   "version": "1.0.1",
   "map": {
-    "prefabs": {
-      "time": 1773554223318.4458,
-      "uuid": "b325d914-91d4-4f4b-9cd3-082841daaa5e"
-    },
     "resources": {
-      "time": 1773625708322.8125,
+      "time": 1773627173674.0425,
       "uuid": "0f85d871-0956-45f4-bf44-78626df726d9"
     },
     "scenes": {
-      "time": 1773625708325.7134,
+      "time": 1773627173674.9756,
       "uuid": "67fb136c-6fb0-4fcd-a465-3fe52d7f9c4c"
     },
     "scripts": {
-      "time": 1773625708330.394,
+      "time": 1773628647675.0051,
       "uuid": "c4aaaf50-d223-42d5-8818-6228b46777ad"
     },
-    "resources/cards": {
-      "time": 1773554223307.0117,
-      "uuid": "65c3e59e-c4f1-4620-af73-4036f57f98d9"
-    },
-    "resources/characters": {
-      "time": 1773554223310.673,
-      "uuid": "165fa5cf-d351-42ff-b6e7-57e8f4827d88"
-    },
-    "resources/enemies": {
-      "time": 1773554223314.2957,
-      "uuid": "657473d9-60e1-4365-868c-00fed4777756"
-    },
-    "resources/ui": {
-      "time": 1773554223317.083,
-      "uuid": "71c8cbd0-2db7-45cb-8b8b-6b0b81cddc36"
-    },
     "Main.ts": {
-      "time": 1773625704514.3987,
+      "time": 1773627173660.3474,
       "uuid": "b562b8d3-910a-46e1-9f64-8d3dad282558"
     },
     "scripts/BattleScene.ts": {
-      "time": 1773625704549.259,
+      "time": 1773628807917.144,
       "uuid": "2a3b3026-a7f1-401e-aa93-a6d049aa8d0c"
     },
     "scripts/BattleSystem.ts": {
-      "time": 1773625704550.9817,
+      "time": 1773627173675.376,
       "uuid": "c3876d01-69fe-4a04-b827-ddfdabc13641"
     },
     "scripts/CardDatabase.ts": {
-      "time": 1773625704552.0354,
+      "time": 1773627173675.5798,
       "uuid": "f324b9bf-920e-404b-8bbc-7f8897665b7f"
     },
     "scripts/CardUI.ts": {
-      "time": 1773625704554.8733,
+      "time": 1773627173675.7407,
       "uuid": "beb40d67-9db0-4cc8-b4cd-9b60a1678f2d"
     },
     "scripts/ClassDatabase.ts": {
-      "time": 1773625704555.0579,
+      "time": 1773627173675.9072,
       "uuid": "f60f9b3d-1c5c-4c80-92fd-d075c398da00"
     },
     "scripts/ClassSelectScene.ts": {
-      "time": 1773625708327.8333,
+      "time": 1773628647674.9043,
       "uuid": "a01c38bc-a7b1-4e9a-831c-c16a5cd23366"
     },
     "scripts/EnemyDatabase.ts": {
-      "time": 1773625704555.3745,
+      "time": 1773627173676.2515,
       "uuid": "b14eeddc-785a-4a71-b794-936f202ab102"
     },
     "scripts/GameManager.ts": {
-      "time": 1773625704555.5166,
+      "time": 1773627173676.4304,
       "uuid": "8dac7abe-e9ea-4afe-81b1-9b3231b952b9"
     },
     "scripts/GameState.ts": {
-      "time": 1773625704555.6746,
+      "time": 1773628801621.384,
       "uuid": "275ad5ae-fc38-418d-b17c-a9d34858dd69"
     },
     "scripts/InputManager.ts": {
-      "time": 1773625704555.818,
+      "time": 1773627173676.7812,
       "uuid": "e8b089c2-0546-4dec-8d12-6cd2fde93257"
     },
     "scripts/MapScene.ts": {
-      "time": 1773625708329.7898,
+      "time": 1773628647675.0557,
       "uuid": "67f3ea85-c67d-4e1d-95db-0a90dfc9fbd4"
     },
     "scripts/MenuScene.ts": {
-      "time": 1773625708330.3455,
+      "time": 1773627173677.2644,
       "uuid": "fd6a7e0a-bc19-4391-955c-d01b6b4f89de"
     },
     "prefabs.meta": {
-      "time": 1773625708316.3547
+      "time": 1773627173660.4902
     },
     "resources.meta": {
-      "time": 1773625708317.1333
+      "time": 1773627173660.569
     },
     "scenes.meta": {
-      "time": 1773625708323.2373
+      "time": 1773627173674.1616
     },
     "scripts.meta": {
-      "time": 1773625708325.9778
+      "time": 1773627173675.0793
     },
     "resources/cards.meta": {
-      "time": 1773625708317.6096
+      "time": 1773587914776.9922
     },
     "resources/characters.meta": {
-      "time": 1773625708317.7854
+      "time": 1773587914777.2446
     },
     "resources/enemies.meta": {
-      "time": 1773625708319.7136
+      "time": 1773587914777.3872
     },
     "resources/ui.meta": {
-      "time": 1773625708322.908
+      "time": 1773587914777.5295
     },
     "Main.ts.meta": {
-      "time": 1773625708316.131
+      "time": 1773627173660.4202
     },
     "scripts/BattleScene.ts.meta": {
-      "time": 1773625708326.7358
+      "time": 1773627173675.2837
     },
     "scripts/BattleSystem.ts.meta": {
-      "time": 1773625708326.891
+      "time": 1773627173675.4526
     },
     "scripts/CardDatabase.ts.meta": {
-      "time": 1773625708327.0305
+      "time": 1773627173675.653
     },
     "scripts/CardUI.ts.meta": {
-      "time": 1773625708327.1858
+      "time": 1773627173675.8257
     },
     "scripts/ClassDatabase.ts.meta": {
-      "time": 1773625708327.462
+      "time": 1773627173675.9854
     },
     "scripts/ClassSelectScene.ts.meta": {
-      "time": 1773625708328.043
+      "time": 1773627173676.1543
     },
     "scripts/EnemyDatabase.ts.meta": {
-      "time": 1773625708328.318
+      "time": 1773627173676.3345
     },
     "scripts/GameManager.ts.meta": {
-      "time": 1773625708328.828
+      "time": 1773627173676.517
     },
     "scripts/GameState.ts.meta": {
-      "time": 1773625708329.1497
+      "time": 1773627173676.689
     },
     "scripts/InputManager.ts.meta": {
-      "time": 1773625708329.3054
+      "time": 1773627173676.8604
     },
     "scripts/MapScene.ts.meta": {
-      "time": 1773625708329.9631
+      "time": 1773627173677.178
     },
     "scripts/MenuScene.ts.meta": {
-      "time": 1773625708330.5125
+      "time": 1773627173677.3384
     },
     "resources/app_icon_192x192.png": {
-      "time": 1773625704515.392,
+      "time": 1773627173660.7864,
       "uuid": "d5548098-2a28-4eff-8e8a-f29c31ba97d7"
     },
     "resources/concept_character_assassin.png": {
-      "time": 1773625704517.299,
+      "time": 1773627173661.5393,
       "uuid": "46cec9f4-8c82-4c46-885f-0a2c709bf879"
     },
     "resources/concept_character_mage.png": {
-      "time": 1773625704518.219,
+      "time": 1773627173662.1553,
       "uuid": "3b0fcf0c-2167-49e3-85ea-7f72420b9725"
     },
     "resources/concept_character_warrior.png": {
-      "time": 1773625704519.7664,
+      "time": 1773627173663.277,
       "uuid": "8d2194eb-f6ee-4b9d-b307-6d39317f427c"
     },
     "resources/concept_enemy_boss.png": {
-      "time": 1773625704521.5164,
+      "time": 1773627173664.0798,
       "uuid": "c026e484-b0fd-424b-9fe5-8d30ef7f8930"
     },
     "resources/concept_enemy_elite.png": {
-      "time": 1773625704522.379,
+      "time": 1773627173664.6392,
       "uuid": "795eb047-4df1-4216-b377-c4ee394484fa"
     },
     "resources/concept_enemy_minion.png": {
-      "time": 1773625704525.3145,
+      "time": 1773627173665.2395,
       "uuid": "a9c555a8-f299-4515-9a73-49dc2286dc14"
     },
     "resources/concept_keyvisual_main.png": {
-      "time": 1773625704528.148,
+      "time": 1773627173666.5525,
       "uuid": "42bbbaf3-1ff2-4684-8695-1a46eabfd2ac"
     },
     "resources/concept_scene_battle.png": {
-      "time": 1773625704532.346,
+      "time": 1773627173667.7993,
       "uuid": "3554744d-57a1-474b-bbf8-1e97f9cbeacd"
     },
     "resources/concept_scene_tower.png": {
-      "time": 1773625704535.3228,
+      "time": 1773627173669.3357,
       "uuid": "c7710205-2d65-4d52-aa96-a625e35c60e6"
     },
     "resources/pvp_arena_background.png": {
-      "time": 1773625704536.276,
+      "time": 1773627173671.5542,
       "uuid": "c917e2f5-d3ee-4f05-a148-b2fd48b34746"
     },
     "resources/rank_bronze_128x128.png": {
-      "time": 1773625704536.5696,
+      "time": 1773627173671.7317,
       "uuid": "b802471b-8bc3-4c89-b296-1876402e38d5"
     },
     "resources/rank_bronze_256x256.png": {
-      "time": 1773625704536.8438,
+      "time": 1773627173671.929,
       "uuid": "d836b484-775c-4873-976e-bf7ed2746529"
     },
     "resources/rank_diamond_128x128.png": {
-      "time": 1773625704537.1208,
+      "time": 1773627173672.0923,
       "uuid": "b3f9020a-2df7-4bd5-bd3e-47063e597131"
     },
     "resources/rank_diamond_256x256.png": {
-      "time": 1773625704537.4275,
+      "time": 1773627173672.2722,
       "uuid": "19d58825-939e-4c4a-903a-0b0a9c838826"
     },
     "resources/rank_gold_128x128.png": {
-      "time": 1773625704538.2417,
+      "time": 1773627173672.4377,
       "uuid": "87b6500e-0f1c-4e81-b5cd-96a67c0a6d90"
     },
     "resources/rank_gold_256x256.png": {
-      "time": 1773625704538.6294,
+      "time": 1773627173672.61,
       "uuid": "2a9681de-cc31-4005-8ec5-0d3bc2eb79cc"
     },
     "resources/rank_legend_128x128.png": {
-      "time": 1773625704538.7808,
+      "time": 1773627173672.7593,
       "uuid": "4b00a226-8d1c-4c48-afa4-c38a0c696571"
     },
     "resources/rank_legend_256x256.png": {
-      "time": 1773625704539.0566,
+      "time": 1773627173672.934,
       "uuid": "aaf46900-1bf3-4dac-b538-0a3f8c3eec0d"
     },
     "resources/rank_master_128x128.png": {
-      "time": 1773625704547.8577,
+      "time": 1773627173673.0913,
       "uuid": "9712fccd-1ae2-4fb3-a98a-cbdf3ae8d0d8"
     },
     "resources/rank_master_256x256.png": {
-      "time": 1773625704548.038,
+      "time": 1773627173673.257,
       "uuid": "61cc67fe-643d-4edf-afe1-7019df0703b5"
     },
     "resources/rank_platinum_128x128.png": {
-      "time": 1773625704548.1716,
+      "time": 1773627173673.415,
       "uuid": "ba958ba1-a613-4d30-bebd-d5d5ce72ad2d"
     },
     "resources/rank_platinum_256x256.png": {
-      "time": 1773625704548.422,
+      "time": 1773627173673.5867,
       "uuid": "0c02a6f6-4a0b-40a2-b38f-66a141dc4b41"
     },
     "resources/rank_silver_128x128.png": {
-      "time": 1773625704548.5598,
+      "time": 1773627173673.729,
       "uuid": "da0cc1ae-460c-4dd7-84e9-0883daea0ef7"
     },
     "resources/rank_silver_256x256.png": {
-      "time": 1773625704548.8572,
+      "time": 1773627173673.903,
       "uuid": "75b695aa-608a-4bb4-80a4-f057da6d62d0"
     },
     "scenes/BattleScene.scene": {
-      "time": 1773625708323.7358,
+      "time": 1773627173674.2952,
       "uuid": "7cc838de-5943-495c-bcc6-280f68529aad"
     },
     "scenes/ClassSelectScene.scene": {
-      "time": 1773625708324.1785,
+      "time": 1773627173674.4612,
       "uuid": "2f7f673a-b69d-49ab-92a3-bfa99789ce0f"
     },
     "scenes/MapScene.scene": {
-      "time": 1773625708324.9304,
+      "time": 1773627173674.766,
       "uuid": "746892db-351f-49d9-aad0-906375377727"
     },
     "scenes/MenuScene.scene": {
-      "time": 1773625708325.6533,
+      "time": 1773627173674.913,
       "uuid": "81d912eb-5aef-4a2c-84a5-47e00cadc9d9"
     },
     "resources/app_icon_192x192.png.meta": {
-      "time": 1773625708317.3071
+      "time": 1773627173660.8757
     },
     "resources/concept_character_assassin.png.meta": {
-      "time": 1773625708317.9565
+      "time": 1773627173661.6335
     },
     "resources/concept_enemy_boss.png.meta": {
-      "time": 1773625708318.4285
+      "time": 1773627173664.1748
     },
     "resources/concept_character_warrior.png.meta": {
-      "time": 1773625708318.2651
+      "time": 1773627173663.5264
     },
     "resources/concept_character_mage.png.meta": {
-      "time": 1773625708318.1042
+      "time": 1773627173662.7634
     },
     "resources/concept_enemy_elite.png.meta": {
-      "time": 1773625708318.7297
+      "time": 1773627173664.8713
     },
     "resources/concept_enemy_minion.png.meta": {
-      "time": 1773625708318.896
+      "time": 1773627173665.3477
     },
     "resources/concept_keyvisual_main.png.meta": {
-      "time": 1773625708319.0645
+      "time": 1773627173666.6501
     },
     "resources/concept_scene_battle.png.meta": {
-      "time": 1773625708319.3772
+      "time": 1773627173668.2026
     },
     "resources/concept_scene_tower.png.meta": {
-      "time": 1773625708319.5442
+      "time": 1773627173671.144
     },
     "resources/pvp_arena_background.png.meta": {
-      "time": 1773625708319.9912
+      "time": 1773627173671.648
     },
     "resources/rank_bronze_256x256.png.meta": {
-      "time": 1773625708320.769
+      "time": 1773627173672.0093
     },
     "resources/rank_bronze_128x128.png.meta": {
-      "time": 1773625708320.5986
+      "time": 1773627173671.8125
     },
     "resources/rank_diamond_128x128.png.meta": {
-      "time": 1773625708320.9294
+      "time": 1773627173672.1682
     },
     "resources/rank_diamond_256x256.png.meta": {
-      "time": 1773625708321.091
+      "time": 1773627173672.3499
     },
     "resources/rank_gold_128x128.png.meta": {
-      "time": 1773625708321.2544
+      "time": 1773627173672.5146
     },
     "resources/rank_gold_256x256.png.meta": {
-      "time": 1773625708321.418
+      "time": 1773627173672.6838
     },
     "resources/rank_legend_128x128.png.meta": {
-      "time": 1773625708321.589
+      "time": 1773627173672.8357
     },
     "resources/rank_master_128x128.png.meta": {
-      "time": 1773625708321.9148
+      "time": 1773627173673.1638
     },
     "resources/rank_legend_256x256.png.meta": {
-      "time": 1773625708321.7546
+      "time": 1773627173673.0159
     },
     "resources/rank_master_256x256.png.meta": {
-      "time": 1773625708322.1304
+      "time": 1773627173673.3306
     },
     "resources/rank_platinum_128x128.png.meta": {
-      "time": 1773625708322.3047
+      "time": 1773627173673.4888
     },
     "resources/rank_platinum_256x256.png.meta": {
-      "time": 1773625708322.4517
+      "time": 1773627173673.6523
     },
     "resources/rank_silver_128x128.png.meta": {
-      "time": 1773625708322.6084
+      "time": 1773627173673.8042
     },
     "scenes/BattleScene.scene.meta": {
-      "time": 1773625708323.9011
+      "time": 1773627173674.3772
     },
     "resources/rank_silver_256x256.png.meta": {
-      "time": 1773625708322.7566
+      "time": 1773627173673.9983
     },
     "scenes/ClassSelectScene.scene.meta": {
-      "time": 1773625708324.3254
+      "time": 1773627173674.5388
     },
     "scenes/MapScene.scene.meta": {
-      "time": 1773625708325.094
+      "time": 1773627173674.836
     },
     "scenes/MenuScene.scene.meta": {
-      "time": 1773625708325.8115
+      "time": 1773627173675.01
     },
     "scenes/MENUSCENE_FIX.md.meta": {
-      "time": 1773625708324.6438
+      "time": 1773627173674.6848
     },
     "scenes/MENUSCENE_FIX.md": {
-      "time": 1773625708324.4832,
+      "time": 1773627173674.6128,
       "uuid": "64cdb868-b0e8-422c-b4ce-10e94e3e0890"
+    },
+    "prefabs": {
+      "time": 1773629104745.0408,
+      "uuid": "b325d914-91d4-4f4b-9cd3-082841daaa5e"
+    },
+    "prefabs/Card.prefab.meta": {
+      "time": 1773629104764.9197
+    },
+    "prefabs/Card.prefab": {
+      "time": 1773629104757.464,
+      "uuid": "cd7a78cf-8fa1-4f42-9253-a338239ac17d"
     }
   },
   "missing": {}

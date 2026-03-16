@@ -542,5 +542,13 @@
       "depends": []
     },
     "versionCode": 1
+  },
+  "cd7a78cf-8fa1-4f42-9253-a338239ac17d": {
+    "url": "db://assets/prefabs/Card.prefab",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
   }
 }
