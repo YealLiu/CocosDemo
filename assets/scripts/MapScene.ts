@@ -3,236 +3,238 @@
  * 动态创建UI版本
  */
 
-import { _decorator, Component, Node, Button, Label, Sprite, tween, Vec3, Color, UITransform, ProgressBar } from 'cc';
+import { _decorator, Component, Node, Button, Label, Sprite, Color, Vec3, tween, UITransform, ProgressBar } from 'cc';
 import { GameManager } from './GameManager';
 import { GameState } from './GameState';
 const { ccclass, property } = _decorator;
 
 enum NodeType {
     BATTLE = 'battle',
-    ELITE = 'elite', 
+    ELITE = 'elite',
     SHOP = 'shop',
     REST = 'rest',
     BOSS = 'boss'
 }
 
-interface MapNodeData {
+interface MapNode {
     type: NodeType;
-    icon: string;
-    color: Color;
-    y: number;
+    position: Vec3;
+    connections: number[];
+    visited: boolean;
 }
 
 @ccclass('MapScene')
 export class MapScene extends Component {
-    // UI元素
+    private mapNodes: MapNode[] = [];
+    private currentNodeIndex: number = -1;
     private hpLabel: Label | null = null;
     private goldLabel: Label | null = null;
     private floorLabel: Label | null = null;
-    private mapNodes: Node[] = [];
 
     onLoad() {
-        console.log('[MapScene] 动态创建UI元素');
-        this.createUI();
-        this.bindEvents();
+        console.log('[MapScene] onLoad - 动态创建UI');
+        this.createBackground();
+        this.createStatusBar();
+        this.createTitle();
+        this.generateMap();
+        this.createMapNodes();
     }
 
-    /**
-     * 动态创建所有UI元素
-     */
-    private createUI(): void {
-        const canvas = this.node;
-
-        // 1. 创建顶部状态栏
-        this.createStatusBar(canvas);
-
-        // 2. 创建地图节点
-        this.createMapNodes(canvas);
-
-        // 3. 创建返回按钮
-        this.createBackButton(canvas);
+    onEnable() {
+        this.updateStatusBar();
     }
 
-    /**
-     * 创建顶部状态栏
-     */
-    private createStatusBar(parent: Node): void {
-        const statusBar = new Node('StatusBar');
-        parent.addChild(statusBar);
-        statusBar.setPosition(0, 550, 0);
+    private createBackground(): void {
+        const bgNode = new Node('Background');
+        this.node.addChild(bgNode);
+        
+        const uiTransform = bgNode.addComponent(UITransform);
+        uiTransform.setContentSize(720, 1280);
+        
+        const sprite = bgNode.addComponent(Sprite);
+        sprite.color = new Color(20, 20, 30, 255);
+        sprite.type = 0;
+        
+        bgNode.setPosition(0, 0, 0);
+    }
 
-        const uiTransform = statusBar.addComponent(UITransform);
+    private createStatusBar(): void {
+        const statusNode = new Node('StatusBar');
+        this.node.addChild(statusNode);
+        statusNode.setPosition(0, 550, 0);
+        
+        const uiTransform = statusNode.addComponent(UITransform);
         uiTransform.setContentSize(600, 80);
-
-        // HP显示
-        this.hpLabel = this.createStatusLabel(statusBar, '❤️ 80/80', -200, new Color(255, 100, 100, 255));
-
-        // 金币显示
-        this.goldLabel = this.createStatusLabel(statusBar, '💰 100', 0, new Color(255, 215, 100, 255));
-
-        // 层数显示
-        this.floorLabel = this.createStatusLabel(statusBar, '🏰 第1层', 200, new Color(200, 200, 200, 255));
-
-        console.log('[MapScene] 状态栏创建完成');
+        
+        const sprite = statusNode.addComponent(Sprite);
+        sprite.color = new Color(40, 40, 50, 200);
+        sprite.type = 1;
+        
+        // HP
+        this.hpLabel = this.createStatusLabel(statusNode, 'HP', '❤️ 80/80', -200, 0, new Color(255, 100, 100, 255));
+        
+        // 金币
+        this.goldLabel = this.createStatusLabel(statusNode, 'Gold', '💰 99', 0, 0, new Color(255, 215, 0, 255));
+        
+        // 楼层
+        this.floorLabel = this.createStatusLabel(statusNode, 'Floor', '🏰 第1层', 200, 0, new Color(200, 200, 200, 255));
     }
 
-    /**
-     * 创建状态标签
-     */
-    private createStatusLabel(parent: Node, text: string, x: number, color: Color): Label {
-        const labelNode = new Node('StatusLabel');
+    private createStatusLabel(parent: Node, name: string, text: string, x: number, y: number, color: Color): Label {
+        const labelNode = new Node(name);
         parent.addChild(labelNode);
-        labelNode.setPosition(x, 0, 0);
-
+        labelNode.setPosition(x, y, 0);
+        
         const uiTransform = labelNode.addComponent(UITransform);
-        uiTransform.setContentSize(180, 60);
-
+        uiTransform.setContentSize(180, 40);
+        
         const label = labelNode.addComponent(Label);
         label.string = text;
-        label.fontSize = 28;
-        label.horizontalAlign = Label.HorizontalAlign.CENTER;
-        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.fontSize = 24;
+        label.horizontalAlign = 1;
+        label.verticalAlign = 1;
         label.color = color;
-
+        
         return label;
     }
 
-    /**
-     * 创建地图节点
-     */
-    private createMapNodes(parent: Node): void {
-        const mapData: MapNodeData[] = [
-            { type: NodeType.BATTLE, icon: '⚔️', color: new Color(180, 80, 80, 255), y: 300 },
-            { type: NodeType.ELITE, icon: '👹', color: new Color(180, 100, 50, 255), y: 150 },
-            { type: NodeType.SHOP, icon: '🏪', color: new Color(80, 120, 180, 255), y: 0 },
-            { type: NodeType.REST, icon: '🔥', color: new Color(80, 150, 80, 255), y: -150 },
-            { type: NodeType.BOSS, icon: '👑', color: new Color(150, 50, 150, 255), y: -300 }
-        ];
-
-        mapData.forEach((data, index) => {
-            const node = this.createMapNode(parent, data, index);
-            this.mapNodes.push(node);
-        });
-
-        console.log('[MapScene] 地图节点创建完成');
+    private createTitle(): void {
+        const titleNode = new Node('Title');
+        this.node.addChild(titleNode);
+        titleNode.setPosition(0, 450, 0);
+        
+        const uiTransform = titleNode.addComponent(UITransform);
+        uiTransform.setContentSize(300, 60);
+        
+        const label = titleNode.addComponent(Label);
+        label.string = '地图';
+        label.fontSize = 48;
+        label.horizontalAlign = 1;
+        label.verticalAlign = 1;
+        label.color = new Color(255, 255, 255, 255);
+        label.isBold = true;
     }
 
-    /**
-     * 创建单个地图节点
-     */
-    private createMapNode(parent: Node, data: MapNodeData, index: number): Node {
-        const node = new Node(`Node_${index}`);
-        parent.addChild(node);
-        node.setPosition(0, data.y, 0);
+    private generateMap(): void {
+        this.mapNodes = [];
+        const rows = 5;
+        
+        for (let row = 0; row < rows; row++) {
+            let nodeType: NodeType;
+            
+            if (row === 0) {
+                nodeType = NodeType.BATTLE;
+            } else if (row === rows - 1) {
+                nodeType = NodeType.BOSS;
+            } else {
+                const rand = Math.random();
+                if (rand < 0.5) nodeType = NodeType.BATTLE;
+                else if (rand < 0.7) nodeType = NodeType.ELITE;
+                else if (rand < 0.85) nodeType = NodeType.SHOP;
+                else nodeType = NodeType.REST;
+            }
+            
+            const node: MapNode = {
+                type: nodeType,
+                position: new Vec3(0, 300 - row * 120, 0),
+                connections: row < rows - 1 ? [row + 1] : [],
+                visited: false
+            };
+            
+            this.mapNodes.push(node);
+        }
+        
+        this.currentNodeIndex = -1;
+    }
 
-        // UI变换
+    private createMapNodes(): void {
+        this.mapNodes.forEach((nodeData, index) => {
+            const node = this.createNodeUI(nodeData, index);
+            this.node.addChild(node);
+        });
+    }
+
+    private createNodeUI(nodeData: MapNode, index: number): Node {
+        const node = new Node(`Node_${index}`);
+        node.setPosition(nodeData.position);
+        
         const uiTransform = node.addComponent(UITransform);
         uiTransform.setContentSize(80, 80);
-
-        // 背景Sprite
+        
         const sprite = node.addComponent(Sprite);
-        sprite.color = data.color;
-        sprite.type = Sprite.Type.SIMPLE;
-
-        // 图标Label
-        const iconNode = new Node('Icon');
-        node.addChild(iconNode);
-        const iconTransform = iconNode.addComponent(UITransform);
-        iconTransform.setContentSize(80, 80);
-        const iconLabel = iconNode.addComponent(Label);
-        iconLabel.string = data.icon;
-        iconLabel.fontSize = 40;
-        iconLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-        iconLabel.verticalAlign = Label.VerticalAlign.CENTER;
-
-        // 悬停效果
-        node.on(Node.EventType.MOUSE_ENTER, () => {
-            tween(node).to(0.1, { scale: new Vec3(1.1, 1.1, 1) }).start();
-        }, this);
-        node.on(Node.EventType.MOUSE_LEAVE, () => {
-            tween(node).to(0.1, { scale: new Vec3(1, 1, 1) }).start();
-        }, this);
-
-        // 点击事件
-        node.on(Node.EventType.TOUCH_END, () => {
-            this.onNodeClick(data.type);
-        }, this);
-
+        sprite.color = this.getNodeColor(nodeData.type);
+        sprite.type = 1;
+        
+        const labelNode = new Node('Label');
+        node.addChild(labelNode);
+        const labelTransform = labelNode.addComponent(UITransform);
+        labelTransform.setContentSize(80, 80);
+        const label = labelNode.addComponent(Label);
+        label.string = this.getNodeIcon(nodeData.type);
+        label.fontSize = 40;
+        label.horizontalAlign = 1;
+        label.verticalAlign = 1;
+        
+        if (this.isNodeAccessible(index)) {
+            node.on(Node.EventType.TOUCH_END, () => this.onNodeClick(index), this);
+            
+            node.on(Node.EventType.MOUSE_ENTER, () => {
+                tween(node).to(0.1, { scale: new Vec3(1.1, 1.1, 1) }).start();
+            }, this);
+            node.on(Node.EventType.MOUSE_LEAVE, () => {
+                tween(node).to(0.1, { scale: new Vec3(1, 1, 1) }).start();
+            }, this);
+        } else {
+            sprite.color = new Color(80, 80, 80, 255);
+        }
+        
         return node;
     }
 
-    /**
-     * 创建返回按钮
-     */
-    private createBackButton(parent: Node): void {
-        const buttonNode = new Node('BackButton');
-        parent.addChild(buttonNode);
-        buttonNode.setPosition(-250, 500, 0);
-
-        const uiTransform = buttonNode.addComponent(UITransform);
-        uiTransform.setContentSize(120, 60);
-
-        const sprite = buttonNode.addComponent(Sprite);
-        sprite.color = new Color(100, 100, 100, 255);
-
-        const button = buttonNode.addComponent(Button);
-
-        const labelNode = new Node('Label');
-        buttonNode.addChild(labelNode);
-        const labelTransform = labelNode.addComponent(UITransform);
-        labelTransform.setContentSize(120, 60);
-        const label = labelNode.addComponent(Label);
-        label.string = '返回';
-        label.fontSize = 28;
-        label.horizontalAlign = Label.HorizontalAlign.CENTER;
-        label.verticalAlign = Label.VerticalAlign.CENTER;
-        label.color = new Color(255, 255, 255, 255);
-
-        button.node.on(Button.EventType.CLICK, () => {
-            GameManager.instance?.returnToMainMenu();
-        }, this);
-
-        this.addHoverEffect(buttonNode);
-
-        console.log('[MapScene] 返回按钮创建完成');
+    private getNodeColor(type: NodeType): Color {
+        switch (type) {
+            case NodeType.BATTLE: return new Color(180, 80, 80, 255);
+            case NodeType.ELITE: return new Color(180, 100, 50, 255);
+            case NodeType.SHOP: return new Color(80, 120, 180, 255);
+            case NodeType.REST: return new Color(80, 150, 80, 255);
+            case NodeType.BOSS: return new Color(150, 50, 150, 255);
+            default: return new Color(128, 128, 128, 255);
+        }
     }
 
-    /**
-     * 添加悬停效果
-     */
-    private addHoverEffect(node: Node): void {
-        node.on(Node.EventType.MOUSE_ENTER, () => {
-            tween(node).to(0.1, { scale: new Vec3(1.05, 1.05, 1) }).start();
-        }, this);
-        node.on(Node.EventType.MOUSE_LEAVE, () => {
-            tween(node).to(0.1, { scale: new Vec3(1, 1, 1) }).start();
-        }, this);
+    private getNodeIcon(type: NodeType): string {
+        switch (type) {
+            case NodeType.BATTLE: return '⚔️';
+            case NodeType.ELITE: return '👹';
+            case NodeType.SHOP: return '🏪';
+            case NodeType.REST: return '🔥';
+            case NodeType.BOSS: return '👑';
+            default: return '❓';
+        }
     }
 
-    /**
-     * 绑定事件
-     */
-    private bindEvents(): void {
-        // 更新UI
-        this.updateUI();
+    private isNodeAccessible(index: number): boolean {
+        if (this.currentNodeIndex === -1) return index === 0;
+        return this.mapNodes[this.currentNodeIndex].connections.includes(index);
     }
 
-    /**
-     * 节点点击处理
-     */
-    private onNodeClick(nodeType: NodeType): void {
-        console.log(`[MapScene] 点击节点: ${nodeType}`);
-        
-        switch (nodeType) {
+    private onNodeClick(index: number): void {
+        if (!this.isNodeAccessible(index)) return;
+
+        const nodeData = this.mapNodes[index];
+        this.mapNodes[index].visited = true;
+        this.currentNodeIndex = index;
+
+        switch (nodeData.type) {
             case NodeType.BATTLE:
             case NodeType.ELITE:
-                GameManager.instance?.enterBattle(nodeType === NodeType.ELITE);
+                GameManager.instance?.enterNode(nodeData.type);
                 break;
             case NodeType.SHOP:
-                GameManager.instance?.enterShop();
+                console.log('商店功能暂不开放');
                 break;
             case NodeType.REST:
-                GameManager.instance?.enterRest();
+                this.rest();
                 break;
             case NodeType.BOSS:
                 GameManager.instance?.enterBoss();
@@ -240,27 +242,24 @@ export class MapScene extends Component {
         }
     }
 
-    /**
-     * 更新UI
-     */
-    private updateUI(): void {
+    private rest(): void {
         const gameState = GameState.instance;
-        const player = gameState?.player;
-        
-        if (!player) return;
-
-        if (this.hpLabel) {
-            this.hpLabel.string = `❤️ ${player.hp}/${player.maxHp}`;
-        }
-        if (this.goldLabel) {
-            this.goldLabel.string = `💰 ${player.gold}`;
-        }
-        if (this.floorLabel) {
-            this.floorLabel.string = `🏰 第${gameState.map.floor}层`;
+        if (gameState.player) {
+            const healAmount = Math.floor(gameState.player.maxHp * 0.3);
+            gameState.player.hp = Math.min(gameState.player.maxHp, gameState.player.hp + healAmount);
+            console.log(`恢复${healAmount}点生命！`);
+            this.updateStatusBar();
         }
     }
 
-    onEnable() {
-        this.updateUI();
+    private updateStatusBar(): void {
+        const gameState = GameState.instance;
+        const player = gameState?.player;
+        
+        if (player) {
+            if (this.hpLabel) this.hpLabel.string = `❤️ ${player.hp}/${player.maxHp}`;
+            if (this.goldLabel) this.goldLabel.string = `💰 ${player.gold}`;
+            if (this.floorLabel) this.floorLabel.string = `🏰 第${gameState.map.floor}层`;
+        }
     }
 }

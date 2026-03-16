@@ -23,7 +23,7 @@
     "_prefab": null,
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 10
+      "__id__": 12
     },
     "_id": "2f7f673a-b69d-49ab-92a3-bfa99789ce0f"
   },
@@ -39,28 +39,19 @@
         "__id__": 3
       },
       {
-        "__id__": 6
-      },
-      {
-        "__id__": 20
-      },
-      {
-        "__id__": 34
-      },
-      {
-        "__id__": 48
+        "__id__": 5
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 62
+        "__id__": 9
       },
       {
-        "__id__": 63
+        "__id__": 10
       },
       {
-        "__id__": 64
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -104,9 +95,6 @@
     "_components": [
       {
         "__id__": 4
-      },
-      {
-        "__id__": 5
       }
     ],
     "_prefab": null,
@@ -160,40 +148,6 @@
     "_id": "4"
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 3
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "_customMaterial": null,
-    "_srcBlendFactor": 2,
-    "_dstBlendFactor": 4,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 25,
-      "g": 20,
-      "b": 35,
-      "a": 255
-    },
-    "_spriteFrame": null,
-    "_type": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_useGrayscale": false,
-    "_atlas": null,
-    "_id": "5"
-  },
-  {
     "__type__": "cc.Node",
     "_name": "Title",
     "_objFlags": 0,
@@ -204,10 +158,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 7
+        "__id__": 6
       },
       {
-        "__id__": 8
+        "__id__": 7
       }
     ],
     "_prefab": null,
@@ -237,14 +191,14 @@
       "y": 0,
       "z": 0
     },
-    "_id": "6"
+    "_id": "5"
   },
   {
     "__type__": "cc.UITransform",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 6
+      "__id__": 5
     },
     "_enabled": true,
     "__prefab": null,
@@ -258,14 +212,14 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_id": "7"
+    "_id": "6"
   },
   {
     "__type__": "cc.Label",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 6
+      "__id__": 5
     },
     "_enabled": true,
     "__prefab": null,
@@ -294,7 +248,84 @@
     "_isBold": true,
     "_underlineHeight": 0,
     "_cacheMode": 0,
+    "_id": "7"
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 720,
+      "height": 1280
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
     "_id": "8"
+  },
+  {
+    "__type__": "cc.Canvas",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_cameraComponent": {
+      "__id__": 10
+    },
+    "_alignCanvasWithScreen": true,
+    "_id": "9"
+  },
+  {
+    "__type__": "cc.Camera",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_projection": 0,
+    "_priority": 1073741824,
+    "_fov": 45,
+    "_fovAxis": 0,
+    "_orthoHeight": 640,
+    "_near": 1,
+    "_far": 2000,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_depth": 1,
+    "_stencil": 0,
+    "_clearFlags": 7,
+    "_rect": {
+      "__type__": "cc.Rect",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "_aperture": 19,
+    "_shutter": 7,
+    "_iso": 0,
+    "_screenScale": 1,
+    "_visibility": 33554432,
+    "_targetTexture": null,
+    "_id": "10"
   },
   {
     "__type__": "ClassSelectScene",
@@ -305,34 +336,27 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "backButton": null,
-    "warriorCard": null,
-    "assassinCard": null,
-    "mageCard": null,
-    "warriorDescLabel": null,
-    "assassinDescLabel": null,
-    "mageDescLabel": null,
-    "_id": "9"
+    "_id": "11"
   },
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 11
-    },
-    "shadows": {
-      "__id__": 12
-    },
-    "_skybox": {
       "__id__": 13
     },
-    "fog": {
+    "shadows": {
       "__id__": 14
     },
-    "octree": {
+    "_skybox": {
       "__id__": 15
     },
-    "lightProbeInfo": {
+    "fog": {
       "__id__": 16
+    },
+    "octree": {
+      "__id__": 17
+    },
+    "lightProbeInfo": {
+      "__id__": 18
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
