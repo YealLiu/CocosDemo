@@ -1,295 +1,340 @@
 /**
  * BattleScene.ts - 战斗场景控制器
+ * 动态创建UI版本
  */
 
-import { _decorator, Component, Node, Button, Label, ProgressBar, instantiate, Prefab, Vec3, tween, UIOpacity } from 'cc';
+import { _decorator, Component, Node, Button, Label, Sprite, ProgressBar, tween, Vec3, Color, UITransform } from 'cc';
 import { GameManager } from './GameManager';
-import { GameState, CardType } from './GameState';
-import { BattleSystem, BattleEvent, BattleResult } from './BattleSystem';
-import { CardDatabase, getCardTypeColor } from './CardDatabase';
-import { Enemy } from './EnemyDatabase';
+import { GameState } from './GameState';
+import { BattleSystem } from './BattleSystem';
 const { ccclass, property } = _decorator;
 
 @ccclass('BattleScene')
 export class BattleScene extends Component {
-    // 卡牌预制体
-    @property(Prefab)
-    cardPrefab: Prefab | null = null;
-
-    // UI引用 - 玩家
-    @property(Label)
-    playerHpLabel: Label | null = null;
-    @property(ProgressBar)
-    playerHpBar: ProgressBar | null = null;
-    @property(Label)
-    playerEnergyLabel: Label | null = null;
-    @property(Label)
-    playerBlockLabel: Label | null = null;
-
-    // UI引用 - 敌人
-    @property(Node)
-    enemyNode: Node | null = null;
-    @property(Label)
-    enemyNameLabel: Label | null = null;
-    @property(Label)
-    enemyHpLabel: Label | null = null;
-    @property(ProgressBar)
-    enemyHpBar: ProgressBar | null = null;
-    @property(Label)
-    enemyBlockLabel: Label | null = null;
-    @property(Label)
-    enemyIntentLabel: Label | null = null;
-
-    // UI引用 - 手牌区域
-    @property(Node)
-    handArea: Node | null = null;
-
-    // UI引用 - 牌堆
-    @property(Label)
-    drawPileLabel: Label | null = null;
-    @property(Label)
-    discardPileLabel: Label | null = null;
-
-    // UI引用 - 回合
-    @property(Label)
-    turnLabel: Label | null = null;
-
-    // UI引用 - 战斗日志
-    @property(Label)
-    battleLogLabel: Label | null = null;
-
-    // UI引用 - 按钮
-    @property(Button)
-    endTurnButton: Button | null = null;
-
-    // UI引用 - 游戏结束面板
-    @property(Node)
-    gameOverPanel: Node | null = null;
-    @property(Label)
-    gameOverTitle: Label | null = null;
-    @property(Label)
-    gameOverDesc: Label | null = null;
+    // UI元素引用
+    private playerHpLabel: Label | null = null;
+    private playerHpBar: ProgressBar | null = null;
+    private playerEnergyLabel: Label | null = null;
+    private playerBlockLabel: Label | null = null;
+    private enemyNameLabel: Label | null = null;
+    private enemyHpLabel: Label | null = null;
+    private enemyHpBar: ProgressBar | null = null;
+    private enemyIntentLabel: Label | null = null;
+    private endTurnButton: Button | null = null;
+    private battleLogLabel: Label | null = null;
 
     // 战斗系统
     private battleSystem: BattleSystem | null = null;
 
-    // 卡牌节点列表
-    private cardNodes: Node[] = [];
-
     onLoad() {
-        // 获取战斗系统
+        console.log('[BattleScene] 动态创建UI元素');
+        this.createUI();
+        this.bindEvents();
+        this.initBattle();
+    }
+
+    /**
+     * 动态创建所有UI元素
+     */
+    private createUI(): void {
+        const canvas = this.node;
+
+        // 1. 创建玩家状态区
+        this.createPlayerStatus(canvas);
+
+        // 2. 创建敌人区域
+        this.createEnemyArea(canvas);
+
+        // 3. 创建结束回合按钮
+        this.createEndTurnButton(canvas);
+
+        // 4. 创建战斗日志
+        this.createBattleLog(canvas);
+
+        // 5. 创建返回按钮
+        this.createBackButton(canvas);
+    }
+
+    /**
+     * 创建玩家状态区
+     */
+    private createPlayerStatus(parent: Node): void {
+        const statusNode = new Node('PlayerStatus');
+        parent.addChild(statusNode);
+        statusNode.setPosition(-200, -400, 0);
+
+        const uiTransform = statusNode.addComponent(UITransform);
+        uiTransform.setContentSize(300, 150);
+
+        // 背景
+        const sprite = statusNode.addComponent(Sprite);
+        sprite.color = new Color(40, 40, 60, 200);
+        sprite.type = Sprite.Type.SIMPLE;
+
+        // HP条
+        this.playerHpBar = this.createProgressBar(statusNode, 'HPBar', 0, 40, new Color(200, 50, 50, 255));
+        this.playerHpLabel = this.createLabel(statusNode, 'HPLabel', '❤️ 80/80', 0, 40, 24, new Color(255, 100, 100, 255));
+
+        // 能量
+        this.playerEnergyLabel = this.createLabel(statusNode, 'EnergyLabel', '⚡ 3/3', -80, -10, 28, new Color(100, 200, 255, 255));
+
+        // 格挡
+        this.playerBlockLabel = this.createLabel(statusNode, 'BlockLabel', '🛡️ 0', 80, -10, 28, new Color(150, 150, 150, 255));
+
+        console.log('[BattleScene] 玩家状态区创建完成');
+    }
+
+    /**
+     * 创建敌人区域
+     */
+    private createEnemyArea(parent: Node): void {
+        const enemyNode = new Node('EnemyArea');
+        parent.addChild(enemyNode);
+        enemyNode.setPosition(0, 200, 0);
+
+        const uiTransform = enemyNode.addComponent(UITransform);
+        uiTransform.setContentSize(300, 200);
+
+        // 背景
+        const sprite = enemyNode.addComponent(Sprite);
+        sprite.color = new Color(60, 40, 40, 200);
+        sprite.type = Sprite.Type.SIMPLE;
+
+        // 敌人名称
+        this.enemyNameLabel = this.createLabel(enemyNode, 'EnemyName', '👹 黑暗奴仆', 0, 60, 32, new Color(255, 150, 150, 255));
+
+        // HP条
+        this.enemyHpBar = this.createProgressBar(enemyNode, 'EnemyHPBar', 0, 20, new Color(200, 50, 50, 255));
+        this.enemyHpLabel = this.createLabel(enemyNode, 'EnemyHPLabel', '40/40', 0, 20, 22, new Color(255, 255, 255, 255));
+
+        // 意图
+        this.enemyIntentLabel = this.createLabel(enemyNode, 'EnemyIntent', '🔴 攻击 10', 0, -40, 26, new Color(255, 200, 100, 255));
+
+        console.log('[BattleScene] 敌人区域创建完成');
+    }
+
+    /**
+     * 创建结束回合按钮
+     */
+    private createEndTurnButton(parent: Node): void {
+        const buttonNode = new Node('EndTurnButton');
+        parent.addChild(buttonNode);
+        buttonNode.setPosition(200, -400, 0);
+
+        const uiTransform = buttonNode.addComponent(UITransform);
+        uiTransform.setContentSize(150, 80);
+
+        const sprite = buttonNode.addComponent(Sprite);
+        sprite.color = new Color(80, 120, 80, 255);
+
+        this.endTurnButton = buttonNode.addComponent(Button);
+
+        const labelNode = new Node('Label');
+        buttonNode.addChild(labelNode);
+        const labelTransform = labelNode.addComponent(UITransform);
+        labelTransform.setContentSize(150, 80);
+        const label = labelNode.addComponent(Label);
+        label.string = '结束回合';
+        label.fontSize = 28;
+        label.horizontalAlign = Label.HorizontalAlign.CENTER;
+        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.color = new Color(255, 255, 255, 255);
+
+        // 点击事件
+        this.endTurnButton.node.on(Button.EventType.CLICK, this.onEndTurnClick, this);
+
+        // 悬停效果
+        this.addHoverEffect(buttonNode);
+
+        console.log('[BattleScene] 结束回合按钮创建完成');
+    }
+
+    /**
+     * 创建战斗日志
+     */
+    private createBattleLog(parent: Node): void {
+        const logNode = new Node('BattleLog');
+        parent.addChild(logNode);
+        logNode.setPosition(220, 300, 0);
+
+        const uiTransform = logNode.addComponent(UITransform);
+        uiTransform.setContentSize(250, 300);
+
+        // 背景
+        const sprite = logNode.addComponent(Sprite);
+        sprite.color = new Color(30, 30, 30, 200);
+        sprite.type = Sprite.Type.SIMPLE;
+
+        // 日志标签
+        this.battleLogLabel = this.createLabel(logNode, 'LogLabel', '战斗开始！', 0, 120, 20, new Color(200, 200, 200, 255));
+        this.battleLogLabel.overflow = Label.Overflow.SHRINK;
+        this.battleLogLabel.verticalAlign = Label.VerticalAlign.TOP;
+
+        console.log('[BattleScene] 战斗日志创建完成');
+    }
+
+    /**
+     * 创建返回按钮
+     */
+    private createBackButton(parent: Node): void {
+        const buttonNode = new Node('BackButton');
+        parent.addChild(buttonNode);
+        buttonNode.setPosition(-250, 500, 0);
+
+        const uiTransform = buttonNode.addComponent(UITransform);
+        uiTransform.setContentSize(120, 60);
+
+        const sprite = buttonNode.addComponent(Sprite);
+        sprite.color = new Color(100, 100, 100, 255);
+
+        const button = buttonNode.addComponent(Button);
+
+        const labelNode = new Node('Label');
+        buttonNode.addChild(labelNode);
+        const labelTransform = labelNode.addComponent(UITransform);
+        labelTransform.setContentSize(120, 60);
+        const label = labelNode.addComponent(Label);
+        label.string = '返回';
+        label.fontSize = 28;
+        label.horizontalAlign = Label.HorizontalAlign.CENTER;
+        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.color = new Color(255, 255, 255, 255);
+
+        button.node.on(Button.EventType.CLICK, () => {
+            GameManager.instance?.returnToMap();
+        }, this);
+
+        this.addHoverEffect(buttonNode);
+    }
+
+    /**
+     * 创建进度条
+     */
+    private createProgressBar(parent: Node, name: string, x: number, y: number, color: Color): ProgressBar {
+        const barNode = new Node(name);
+        parent.addChild(barNode);
+        barNode.setPosition(x, y, 0);
+
+        const uiTransform = barNode.addComponent(UITransform);
+        uiTransform.setContentSize(200, 20);
+
+        const bar = barNode.addComponent(ProgressBar);
+        bar.progress = 1;
+
+        // 背景
+        const bgSprite = barNode.addComponent(Sprite);
+        bgSprite.color = new Color(50, 50, 50, 255);
+
+        // 进度条填充
+        const fillNode = new Node('Fill');
+        barNode.addChild(fillNode);
+        const fillTransform = fillNode.addComponent(UITransform);
+        fillTransform.setContentSize(200, 20);
+        const fillSprite = fillNode.addComponent(Sprite);
+        fillSprite.color = color;
+        bar.totalLength = 200;
+
+        return bar;
+    }
+
+    /**
+     * 创建标签
+     */
+    private createLabel(parent: Node, name: string, text: string, x: number, y: number, fontSize: number, color: Color): Label {
+        const labelNode = new Node(name);
+        parent.addChild(labelNode);
+        labelNode.setPosition(x, y, 0);
+
+        const uiTransform = labelNode.addComponent(UITransform);
+        uiTransform.setContentSize(200, 40);
+
+        const label = labelNode.addComponent(Label);
+        label.string = text;
+        label.fontSize = fontSize;
+        label.horizontalAlign = Label.HorizontalAlign.CENTER;
+        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.color = color;
+
+        return label;
+    }
+
+    /**
+     * 添加悬停效果
+     */
+    private addHoverEffect(node: Node): void {
+        node.on(Node.EventType.MOUSE_ENTER, () => {
+            tween(node).to(0.1, { scale: new Vec3(1.05, 1.05, 1) }).start();
+        }, this);
+        node.on(Node.EventType.MOUSE_LEAVE, () => {
+            tween(node).to(0.1, { scale: new Vec3(1, 1, 1) }).start();
+        }, this);
+    }
+
+    /**
+     * 绑定事件
+     */
+    private bindEvents(): void {
         this.battleSystem = BattleSystem.instance;
-        if (!this.battleSystem) {
-            console.error('BattleSystem not found!');
-            return;
-        }
-
-        // 绑定按钮事件
-        this.endTurnButton?.node.on(Button.EventType.CLICK, this.onEndTurnClick, this);
-
-        // 绑定战斗事件
-        this.battleSystem.eventTarget.on(BattleEvent.TURN_START, this.onTurnStart, this);
-        this.battleSystem.eventTarget.on(BattleEvent.CARD_PLAYED, this.onCardPlayed, this);
-        this.battleSystem.eventTarget.on(BattleEvent.LOG_MESSAGE, this.onLogMessage, this);
-        this.battleSystem.eventTarget.on(BattleEvent.BATTLE_WON, this.onBattleWon, this);
-        this.battleSystem.eventTarget.on(BattleEvent.BATTLE_LOST, this.onBattleLost, this);
-
-        // 开始战斗
-        const gameState = GameState.instance;
-        if (gameState.map.currentNode) {
-            this.battleSystem.startBattle(gameState.map.currentNode);
-        }
-    }
-
-    onDestroy() {
-        this.endTurnButton?.node.off(Button.EventType.CLICK, this.onEndTurnClick, this);
-        
         if (this.battleSystem) {
-            this.battleSystem.eventTarget.off(BattleEvent.TURN_START, this.onTurnStart, this);
-            this.battleSystem.eventTarget.off(BattleEvent.CARD_PLAYED, this.onCardPlayed, this);
-            this.battleSystem.eventTarget.off(BattleEvent.LOG_MESSAGE, this.onLogMessage, this);
-            this.battleSystem.eventTarget.off(BattleEvent.BATTLE_WON, this.onBattleWon, this);
-            this.battleSystem.eventTarget.off(BattleEvent.BATTLE_LOST, this.onBattleLost, this);
+            // 绑定战斗事件
         }
     }
 
-    // ========== 事件处理 ==========
-
-    private onTurnStart(): void {
+    /**
+     * 初始化战斗
+     */
+    private initBattle(): void {
+        console.log('[BattleScene] 初始化战斗');
         this.updateUI();
-        this.updateHandCards();
     }
 
-    private onCardPlayed(card: any): void {
-        this.updateUI();
-        this.updateHandCards();
-    }
-
-    private onLogMessage(message: string): void {
-        if (this.battleLogLabel) {
-            this.battleLogLabel.string = message;
-        }
-    }
-
-    private onBattleWon(result: BattleResult): void {
-        if (this.gameOverPanel) {
-            this.gameOverPanel.active = true;
-        }
-        if (this.gameOverTitle) {
-            this.gameOverTitle.string = result.rating;
-        }
-        if (this.gameOverDesc) {
-            this.gameOverDesc.string = `${result.desc}\n获得 ${result.goldReward} 金币`;
-        }
-    }
-
-    private onBattleLost(): void {
-        if (this.gameOverPanel) {
-            this.gameOverPanel.active = true;
-        }
-        if (this.gameOverTitle) {
-            this.gameOverTitle.string = '失败...';
-        }
-        if (this.gameOverDesc) {
-            this.gameOverDesc.string = '你的旅程到此结束...';
-        }
-    }
-
+    /**
+     * 结束回合点击
+     */
     private onEndTurnClick(): void {
-        this.battleSystem?.endTurn();
+        console.log('[BattleScene] 结束回合');
+        if (this.endTurnButton) {
+            tween(this.endTurnButton.node)
+                .to(0.1, { scale: new Vec3(0.95, 0.95, 1) })
+                .to(0.1, { scale: new Vec3(1, 1, 1) })
+                .call(() => {
+                    this.battleSystem?.endPlayerTurn();
+                })
+                .start();
+        }
     }
 
-    // ========== UI更新 ==========
-
+    /**
+     * 更新UI
+     */
     private updateUI(): void {
-        const gameState = GameState.instance;
-        const battle = gameState.battle;
-        const player = gameState.player;
-        const enemy = this.battleSystem?.enemy;
-
         // 更新玩家状态
+        const gameState = GameState.instance;
+        const player = gameState?.player;
+        
         if (player) {
             if (this.playerHpLabel) {
-                this.playerHpLabel.string = `${player.hp}/${player.maxHp}`;
+                this.playerHpLabel.string = `❤️ ${player.hp}/${player.maxHp}`;
             }
             if (this.playerHpBar) {
                 this.playerHpBar.progress = player.hp / player.maxHp;
             }
-        }
-
-        if (this.playerEnergyLabel) {
-            this.playerEnergyLabel.string = `${battle.energy}/${battle.maxEnergy}`;
-        }
-
-        if (this.playerBlockLabel) {
-            this.playerBlockLabel.string = battle.block > 0 ? battle.block.toString() : '';
-            this.playerBlockLabel.node.parent!.active = battle.block > 0;
-        }
-
-        // 更新敌人状态
-        if (enemy) {
-            if (this.enemyNameLabel) {
-                this.enemyNameLabel.string = enemy.name;
+            if (this.playerEnergyLabel) {
+                this.playerEnergyLabel.string = `⚡ ${player.energy}/3`;
             }
-            if (this.enemyHpLabel) {
-                this.enemyHpLabel.string = `${enemy.hp}/${enemy.maxHp}`;
-            }
-            if (this.enemyHpBar) {
-                this.enemyHpBar.progress = enemy.hp / enemy.maxHp;
-            }
-            if (this.enemyBlockLabel) {
-                this.enemyBlockLabel.string = enemy.block > 0 ? enemy.block.toString() : '';
-                this.enemyBlockLabel.node.parent!.active = enemy.block > 0;
-            }
-
-            // 更新敌人意图
-            const intent = enemy.getCurrentIntent();
-            if (this.enemyIntentLabel) {
-                this.enemyIntentLabel.string = `${intent.icon} ${intent.desc || intent.type} ${intent.value > 0 ? intent.value : ''}`;
-            }
-        }
-
-        // 更新牌堆
-        if (this.drawPileLabel) {
-            this.drawPileLabel.string = battle.drawPile.length.toString();
-        }
-        if (this.discardPileLabel) {
-            this.discardPileLabel.string = battle.discardPile.length.toString();
-        }
-
-        // 更新回合
-        if (this.turnLabel) {
-            this.turnLabel.string = battle.turn.toString();
-        }
-    }
-
-    private updateHandCards(): void {
-        const gameState = GameState.instance;
-        const hand = gameState.battle.hand;
-
-        // 清除现有卡牌
-        this.cardNodes.forEach(node => node.destroy());
-        this.cardNodes = [];
-
-        // 创建新手牌
-        if (!this.handArea || !this.cardPrefab) return;
-
-        hand.forEach((cardId, index) => {
-            const cardData = CardDatabase[cardId];
-            if (!cardData) return;
-
-            const cardNode = instantiate(this.cardPrefab);
-            cardNode.parent = this.handArea;
-            
-            // 设置卡牌数据
-            const nameLabel = cardNode.getChildByName('Name')?.getComponent(Label);
-            const costLabel = cardNode.getChildByName('Cost')?.getComponent(Label);
-            const descLabel = cardNode.getChildByName('Desc')?.getComponent(Label);
-            const typeSprite = cardNode.getChildByName('Type')?.getComponent(Sprite);
-
-            if (nameLabel) nameLabel.string = cardData.name;
-            if (costLabel) costLabel.string = cardData.cost.toString();
-            if (descLabel) descLabel.string = cardData.description;
-
-            // 绑定点击事件
-            cardNode.on(Node.EventType.TOUCH_END, () => this.onCardClick(index));
-
-            this.cardNodes.push(cardNode);
-        });
-    }
-
-    private onCardClick(index: number): void {
-        // 播放卡牌动画
-        const cardNode = this.cardNodes[index];
-        if (cardNode) {
-            tween(cardNode)
-                .to(0.1, { scale: new Vec3(1.1, 1.1, 1) })
-                .to(0.1, { scale: new Vec3(1, 1, 1) })
-                .start();
-        }
-
-        // 执行出牌
-        const success = this.battleSystem?.playCard(index);
-        if (!success) {
-            // 出牌失败动画
-            if (cardNode) {
-                tween(cardNode)
-                    .by(0.05, { position: new Vec3(10, 0, 0) })
-                    .by(0.05, { position: new Vec3(-20, 0, 0) })
-                    .by(0.05, { position: new Vec3(20, 0, 0) })
-                    .by(0.05, { position: new Vec3(-10, 0, 0) })
-                    .start();
+            if (this.playerBlockLabel) {
+                this.playerBlockLabel.string = `🛡️ ${player.block || 0}`;
             }
         }
     }
 
-    // 继续按钮（战斗胜利后）
-    public onContinueClick(): void {
-        GameManager.instance?.returnToMap();
-    }
-
-    // 返回主菜单（战斗失败后）
-    public onReturnMenuClick(): void {
-        GameManager.instance?.gameOver();
+    /**
+     * 添加战斗日志
+     */
+    public addBattleLog(message: string): void {
+        if (this.battleLogLabel) {
+            this.battleLogLabel.string += `\n${message}`;
+        }
+        console.log(`[Battle] ${message}`);
     }
 }
