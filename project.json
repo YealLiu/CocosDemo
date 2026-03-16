@@ -1,0 +1,17 @@
+{
+  "project_type": "javascript",
+  "debug_mode": 1,
+  "show_fps": false,
+  "frame_rate": 60,
+  "id": "GameCanvas",
+  "render_mode": 2,
+  "engine_version": "3.8.8",
+  "editor_version": "3.8.8",
+  "library_path": "library",
+  "assets_path": "assets",
+  "build_path": "build",
+  "temp_path": "temp",
+  "settings_path": "settings",
+  "packages": "packages",
+  "version": "3.8.8"
+}

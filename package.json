@@ -1,13 +1,36 @@
 {
+  "version": "3.8.8",
+  "creator": {
+    "version": "3.8.8"
+  },
   "name": "qimeng-demo-cocos",
-  "version": "1.0.0",
-  "description": "启蒙游戏 - Cocos Creator 项目",
+  "id": "fa6ee1aa-4535-405a-80c3-9696f569a026",
+  "type": "javascript",
   "main": "index.js",
   "scripts": {
     "build:android": "cocos compile -p android --android-studio",
     "build:web": "cocos compile -p web"
   },
-  "keywords": ["cocos", "game", "android"],
+  "dependencies": {},
+  "devDependencies": {},
+  "description": "启蒙游戏 - Cocos Creator 3.8.8 项目",
+  "keywords": [
+    "cocos",
+    "game",
+    "card-game",
+    "roguelike"
+  ],
   "author": "Enlightenment Team",
-  "license": "MIT"
+  "license": "MIT",
+  "projectType": "javascript",
+  "hasNativeCode": false,
+  "android": {
+    "packageName": "com.enlightenment.game",
+    "targetSdkVersion": 33,
+    "minSdkVersion": 21
+  },
+  "ios": {
+    "bundleId": "com.enlightenment.game"
+  },
+  "uuid": "57220cee-0d0d-4085-9ac4-a77c9b1e0d37"
 }

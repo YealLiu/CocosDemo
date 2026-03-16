@@ -1,0 +1,546 @@
+{
+  "b325d914-91d4-4f4b-9cd3-082841daaa5e": {
+    "url": "db://assets/prefabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "0f85d871-0956-45f4-bf44-78626df726d9": {
+    "url": "db://assets/resources",
+    "value": {},
+    "versionCode": 1
+  },
+  "67fb136c-6fb0-4fcd-a465-3fe52d7f9c4c": {
+    "url": "db://assets/scenes",
+    "value": {},
+    "versionCode": 1
+  },
+  "c4aaaf50-d223-42d5-8818-6228b46777ad": {
+    "url": "db://assets/scripts",
+    "value": {},
+    "versionCode": 1
+  },
+  "65c3e59e-c4f1-4620-af73-4036f57f98d9": {
+    "url": "db://assets/resources/cards",
+    "value": {},
+    "versionCode": 1
+  },
+  "165fa5cf-d351-42ff-b6e7-57e8f4827d88": {
+    "url": "db://assets/resources/characters",
+    "value": {},
+    "versionCode": 1
+  },
+  "657473d9-60e1-4365-868c-00fed4777756": {
+    "url": "db://assets/resources/enemies",
+    "value": {},
+    "versionCode": 1
+  },
+  "71c8cbd0-2db7-45cb-8b8b-6b0b81cddc36": {
+    "url": "db://assets/resources/ui",
+    "value": {},
+    "versionCode": 1
+  },
+  "b562b8d3-910a-46e1-9f64-8d3dad282558": {
+    "url": "db://assets/Main.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "2a3b3026-a7f1-401e-aa93-a6d049aa8d0c": {
+    "url": "db://assets/scripts/BattleScene.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "c3876d01-69fe-4a04-b827-ddfdabc13641": {
+    "url": "db://assets/scripts/BattleSystem.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "f324b9bf-920e-404b-8bbc-7f8897665b7f": {
+    "url": "db://assets/scripts/CardDatabase.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "beb40d67-9db0-4cc8-b4cd-9b60a1678f2d": {
+    "url": "db://assets/scripts/CardUI.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "f60f9b3d-1c5c-4c80-92fd-d075c398da00": {
+    "url": "db://assets/scripts/ClassDatabase.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "a01c38bc-a7b1-4e9a-831c-c16a5cd23366": {
+    "url": "db://assets/scripts/ClassSelectScene.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "b14eeddc-785a-4a71-b794-936f202ab102": {
+    "url": "db://assets/scripts/EnemyDatabase.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "8dac7abe-e9ea-4afe-81b1-9b3231b952b9": {
+    "url": "db://assets/scripts/GameManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "275ad5ae-fc38-418d-b17c-a9d34858dd69": {
+    "url": "db://assets/scripts/GameState.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "e8b089c2-0546-4dec-8d12-6cd2fde93257": {
+    "url": "db://assets/scripts/InputManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "67f3ea85-c67d-4e1d-95db-0a90dfc9fbd4": {
+    "url": "db://assets/scripts/MapScene.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "fd6a7e0a-bc19-4391-955c-d01b6b4f89de": {
+    "url": "db://assets/scripts/MenuScene.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "d5548098-2a28-4eff-8e8a-f29c31ba97d7": {
+    "url": "db://assets/resources/app_icon_192x192.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "46cec9f4-8c82-4c46-885f-0a2c709bf879": {
+    "url": "db://assets/resources/concept_character_assassin.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3b0fcf0c-2167-49e3-85ea-7f72420b9725": {
+    "url": "db://assets/resources/concept_character_mage.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "8d2194eb-f6ee-4b9d-b307-6d39317f427c": {
+    "url": "db://assets/resources/concept_character_warrior.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c026e484-b0fd-424b-9fe5-8d30ef7f8930": {
+    "url": "db://assets/resources/concept_enemy_boss.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d5548098-2a28-4eff-8e8a-f29c31ba97d7@6c48a": {
+    "url": "db://assets/resources/app_icon_192x192.png@6c48a",
+    "value": {
+      "depends": [
+        "d5548098-2a28-4eff-8e8a-f29c31ba97d7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "46cec9f4-8c82-4c46-885f-0a2c709bf879@6c48a": {
+    "url": "db://assets/resources/concept_character_assassin.png@6c48a",
+    "value": {
+      "depends": [
+        "46cec9f4-8c82-4c46-885f-0a2c709bf879"
+      ]
+    },
+    "versionCode": 1
+  },
+  "795eb047-4df1-4216-b377-c4ee394484fa": {
+    "url": "db://assets/resources/concept_enemy_elite.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a9c555a8-f299-4515-9a73-49dc2286dc14": {
+    "url": "db://assets/resources/concept_enemy_minion.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c026e484-b0fd-424b-9fe5-8d30ef7f8930@6c48a": {
+    "url": "db://assets/resources/concept_enemy_boss.png@6c48a",
+    "value": {
+      "depends": [
+        "c026e484-b0fd-424b-9fe5-8d30ef7f8930"
+      ]
+    },
+    "versionCode": 1
+  },
+  "42bbbaf3-1ff2-4684-8695-1a46eabfd2ac": {
+    "url": "db://assets/resources/concept_keyvisual_main.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "8d2194eb-f6ee-4b9d-b307-6d39317f427c@6c48a": {
+    "url": "db://assets/resources/concept_character_warrior.png@6c48a",
+    "value": {
+      "depends": [
+        "8d2194eb-f6ee-4b9d-b307-6d39317f427c"
+      ]
+    },
+    "versionCode": 1
+  },
+  "3554744d-57a1-474b-bbf8-1e97f9cbeacd": {
+    "url": "db://assets/resources/concept_scene_battle.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3b0fcf0c-2167-49e3-85ea-7f72420b9725@6c48a": {
+    "url": "db://assets/resources/concept_character_mage.png@6c48a",
+    "value": {
+      "depends": [
+        "3b0fcf0c-2167-49e3-85ea-7f72420b9725"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c7710205-2d65-4d52-aa96-a625e35c60e6": {
+    "url": "db://assets/resources/concept_scene_tower.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "795eb047-4df1-4216-b377-c4ee394484fa@6c48a": {
+    "url": "db://assets/resources/concept_enemy_elite.png@6c48a",
+    "value": {
+      "depends": [
+        "795eb047-4df1-4216-b377-c4ee394484fa"
+      ]
+    },
+    "versionCode": 1
+  },
+  "c917e2f5-d3ee-4f05-a148-b2fd48b34746": {
+    "url": "db://assets/resources/pvp_arena_background.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a9c555a8-f299-4515-9a73-49dc2286dc14@6c48a": {
+    "url": "db://assets/resources/concept_enemy_minion.png@6c48a",
+    "value": {
+      "depends": [
+        "a9c555a8-f299-4515-9a73-49dc2286dc14"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b802471b-8bc3-4c89-b296-1876402e38d5": {
+    "url": "db://assets/resources/rank_bronze_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "42bbbaf3-1ff2-4684-8695-1a46eabfd2ac@6c48a": {
+    "url": "db://assets/resources/concept_keyvisual_main.png@6c48a",
+    "value": {
+      "depends": [
+        "42bbbaf3-1ff2-4684-8695-1a46eabfd2ac"
+      ]
+    },
+    "versionCode": 1
+  },
+  "d836b484-775c-4873-976e-bf7ed2746529": {
+    "url": "db://assets/resources/rank_bronze_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "3554744d-57a1-474b-bbf8-1e97f9cbeacd@6c48a": {
+    "url": "db://assets/resources/concept_scene_battle.png@6c48a",
+    "value": {
+      "depends": [
+        "3554744d-57a1-474b-bbf8-1e97f9cbeacd"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b3f9020a-2df7-4bd5-bd3e-47063e597131": {
+    "url": "db://assets/resources/rank_diamond_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c7710205-2d65-4d52-aa96-a625e35c60e6@6c48a": {
+    "url": "db://assets/resources/concept_scene_tower.png@6c48a",
+    "value": {
+      "depends": [
+        "c7710205-2d65-4d52-aa96-a625e35c60e6"
+      ]
+    },
+    "versionCode": 1
+  },
+  "19d58825-939e-4c4a-903a-0b0a9c838826": {
+    "url": "db://assets/resources/rank_diamond_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "c917e2f5-d3ee-4f05-a148-b2fd48b34746@6c48a": {
+    "url": "db://assets/resources/pvp_arena_background.png@6c48a",
+    "value": {
+      "depends": [
+        "c917e2f5-d3ee-4f05-a148-b2fd48b34746"
+      ]
+    },
+    "versionCode": 1
+  },
+  "87b6500e-0f1c-4e81-b5cd-96a67c0a6d90": {
+    "url": "db://assets/resources/rank_gold_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d836b484-775c-4873-976e-bf7ed2746529@6c48a": {
+    "url": "db://assets/resources/rank_bronze_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "d836b484-775c-4873-976e-bf7ed2746529"
+      ]
+    },
+    "versionCode": 1
+  },
+  "2a9681de-cc31-4005-8ec5-0d3bc2eb79cc": {
+    "url": "db://assets/resources/rank_gold_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b802471b-8bc3-4c89-b296-1876402e38d5@6c48a": {
+    "url": "db://assets/resources/rank_bronze_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "b802471b-8bc3-4c89-b296-1876402e38d5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "4b00a226-8d1c-4c48-afa4-c38a0c696571": {
+    "url": "db://assets/resources/rank_legend_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b3f9020a-2df7-4bd5-bd3e-47063e597131@6c48a": {
+    "url": "db://assets/resources/rank_diamond_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "b3f9020a-2df7-4bd5-bd3e-47063e597131"
+      ]
+    },
+    "versionCode": 1
+  },
+  "aaf46900-1bf3-4dac-b538-0a3f8c3eec0d": {
+    "url": "db://assets/resources/rank_legend_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "19d58825-939e-4c4a-903a-0b0a9c838826@6c48a": {
+    "url": "db://assets/resources/rank_diamond_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "19d58825-939e-4c4a-903a-0b0a9c838826"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9712fccd-1ae2-4fb3-a98a-cbdf3ae8d0d8": {
+    "url": "db://assets/resources/rank_master_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "87b6500e-0f1c-4e81-b5cd-96a67c0a6d90@6c48a": {
+    "url": "db://assets/resources/rank_gold_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "87b6500e-0f1c-4e81-b5cd-96a67c0a6d90"
+      ]
+    },
+    "versionCode": 1
+  },
+  "61cc67fe-643d-4edf-afe1-7019df0703b5": {
+    "url": "db://assets/resources/rank_master_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "2a9681de-cc31-4005-8ec5-0d3bc2eb79cc@6c48a": {
+    "url": "db://assets/resources/rank_gold_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "2a9681de-cc31-4005-8ec5-0d3bc2eb79cc"
+      ]
+    },
+    "versionCode": 1
+  },
+  "ba958ba1-a613-4d30-bebd-d5d5ce72ad2d": {
+    "url": "db://assets/resources/rank_platinum_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "4b00a226-8d1c-4c48-afa4-c38a0c696571@6c48a": {
+    "url": "db://assets/resources/rank_legend_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "4b00a226-8d1c-4c48-afa4-c38a0c696571"
+      ]
+    },
+    "versionCode": 1
+  },
+  "0c02a6f6-4a0b-40a2-b38f-66a141dc4b41": {
+    "url": "db://assets/resources/rank_platinum_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "9712fccd-1ae2-4fb3-a98a-cbdf3ae8d0d8@6c48a": {
+    "url": "db://assets/resources/rank_master_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "9712fccd-1ae2-4fb3-a98a-cbdf3ae8d0d8"
+      ]
+    },
+    "versionCode": 1
+  },
+  "da0cc1ae-460c-4dd7-84e9-0883daea0ef7": {
+    "url": "db://assets/resources/rank_silver_128x128.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "aaf46900-1bf3-4dac-b538-0a3f8c3eec0d@6c48a": {
+    "url": "db://assets/resources/rank_legend_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "aaf46900-1bf3-4dac-b538-0a3f8c3eec0d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "75b695aa-608a-4bb4-80a4-f057da6d62d0": {
+    "url": "db://assets/resources/rank_silver_256x256.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "61cc67fe-643d-4edf-afe1-7019df0703b5@6c48a": {
+    "url": "db://assets/resources/rank_master_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "61cc67fe-643d-4edf-afe1-7019df0703b5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "7cc838de-5943-495c-bcc6-280f68529aad": {
+    "url": "db://assets/scenes/BattleScene.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "ba958ba1-a613-4d30-bebd-d5d5ce72ad2d@6c48a": {
+    "url": "db://assets/resources/rank_platinum_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "ba958ba1-a613-4d30-bebd-d5d5ce72ad2d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "2f7f673a-b69d-49ab-92a3-bfa99789ce0f": {
+    "url": "db://assets/scenes/ClassSelectScene.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "0c02a6f6-4a0b-40a2-b38f-66a141dc4b41@6c48a": {
+    "url": "db://assets/resources/rank_platinum_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "0c02a6f6-4a0b-40a2-b38f-66a141dc4b41"
+      ]
+    },
+    "versionCode": 1
+  },
+  "746892db-351f-49d9-aad0-906375377727": {
+    "url": "db://assets/scenes/MapScene.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "da0cc1ae-460c-4dd7-84e9-0883daea0ef7@6c48a": {
+    "url": "db://assets/resources/rank_silver_128x128.png@6c48a",
+    "value": {
+      "depends": [
+        "da0cc1ae-460c-4dd7-84e9-0883daea0ef7"
+      ]
+    },
+    "versionCode": 1
+  },
+  "81d912eb-5aef-4a2c-84a5-47e00cadc9d9": {
+    "url": "db://assets/scenes/MenuScene.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "75b695aa-608a-4bb4-80a4-f057da6d62d0@6c48a": {
+    "url": "db://assets/resources/rank_silver_256x256.png@6c48a",
+    "value": {
+      "depends": [
+        "75b695aa-608a-4bb4-80a4-f057da6d62d0"
+      ]
+    },
+    "versionCode": 1
+  },
+  "64cdb868-b0e8-422c-b4ce-10e94e3e0890": {
+    "url": "db://assets/scenes/MENUSCENE_FIX.md",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  }
+}

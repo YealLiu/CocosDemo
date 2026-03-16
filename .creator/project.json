@@ -1,0 +1,13 @@
+{
+  "general": {
+    "start_scene": "81d912eb-5aef-4a2c-84a5-47e00cadc9d9"
+  },
+  "preview": {
+    "width": 720,
+    "height": 1280,
+    "deviceOrientation": "portrait"
+  },
+  "build": {
+    "excludedModules": []
+  }
+}
