@@ -1,9 +1,9 @@
 /**
  * MapScene.ts - 地图场景控制器
- * 动态创建UI版本
+ * 动态创建UI版本 - 完整版（含连接线）
  */
 
-import { _decorator, Component, Node, Button, Label, Sprite, Color, Vec3, tween, UITransform, ProgressBar } from 'cc';
+import { _decorator, Component, Node, Button, Label, Sprite, Color, Vec3, tween, UITransform, ProgressBar, Graphics } from 'cc';
 import { GameManager } from './GameManager';
 import { GameState } from './GameState';
 const { ccclass, property } = _decorator;
@@ -30,6 +30,8 @@ export class MapScene extends Component {
     private hpLabel: Label | null = null;
     private goldLabel: Label | null = null;
     private floorLabel: Label | null = null;
+    private nodeUIs: Node[] = [];
+    private graphics: Graphics | null = null;
 
     onLoad() {
         console.log('[MapScene] onLoad - 动态创建UI');
@@ -37,11 +39,13 @@ export class MapScene extends Component {
         this.createStatusBar();
         this.createTitle();
         this.generateMap();
+        this.createConnections(); // 先创建连接线
         this.createMapNodes();
     }
 
     onEnable() {
         this.updateStatusBar();
+        this.updateNodeVisuals();
     }
 
     private createBackground(): void {
@@ -147,10 +151,63 @@ export class MapScene extends Component {
         this.currentNodeIndex = -1;
     }
 
+    /**
+     * 创建节点之间的连接线
+     */
+    private createConnections(): void {
+        // 创建Graphics节点用于绘制线条
+        const graphicsNode = new Node('Connections');
+        this.node.addChild(graphicsNode);
+        graphicsNode.setPosition(0, 0, 0);
+        
+        this.graphics = graphicsNode.addComponent(Graphics);
+        this.graphics.lineWidth = 3;
+        
+        this.drawConnections();
+    }
+
+    /**
+     * 绘制连接线
+     */
+    private drawConnections(): void {
+        if (!this.graphics) return;
+        
+        this.graphics.clear();
+        
+        this.mapNodes.forEach((node, index) => {
+            node.connections.forEach(targetIndex => {
+                if (targetIndex < this.mapNodes.length) {
+                    const startPos = node.position;
+                    const endPos = this.mapNodes[targetIndex].position;
+                    
+                    // 判断是否是可访问的路径
+                    const isAccessible = this.isNodeAccessible(targetIndex);
+                    const isVisited = this.mapNodes[targetIndex].visited;
+                    
+                    // 设置线条颜色
+                    if (isVisited) {
+                        this.graphics!.strokeColor = new Color(100, 200, 100, 255); // 已访问 - 绿色
+                    } else if (isAccessible) {
+                        this.graphics!.strokeColor = new Color(255, 215, 100, 255); // 可访问 - 金色
+                    } else {
+                        this.graphics!.strokeColor = new Color(80, 80, 80, 150); // 不可访问 - 灰色
+                    }
+                    
+                    // 绘制线条
+                    this.graphics!.moveTo(startPos.x, startPos.y);
+                    this.graphics!.lineTo(endPos.x, endPos.y);
+                    this.graphics!.stroke();
+                }
+            });
+        });
+    }
+
     private createMapNodes(): void {
+        this.nodeUIs = [];
         this.mapNodes.forEach((nodeData, index) => {
             const node = this.createNodeUI(nodeData, index);
             this.node.addChild(node);
+            this.nodeUIs.push(node);
         });
     }
 
@@ -164,6 +221,25 @@ export class MapScene extends Component {
         const sprite = node.addComponent(Sprite);
         sprite.color = this.getNodeColor(nodeData.type);
         sprite.type = 1;
+
+        // 添加光晕效果（可访问节点）
+        if (this.isNodeAccessible(index)) {
+            const glowNode = new Node('Glow');
+            node.addChild(glowNode);
+            glowNode.setPosition(0, 0, 0);
+            const glowTransform = glowNode.addComponent(UITransform);
+            glowTransform.setContentSize(100, 100);
+            const glowSprite = glowNode.addComponent(Sprite);
+            glowSprite.color = new Color(255, 215, 100, 100);
+            
+            // 脉冲动画
+            tween(glowNode)
+                .to(0.8, { scale: new Vec3(1.1, 1.1, 1) })
+                .to(0.8, { scale: new Vec3(1, 1, 1) })
+                .union()
+                .repeatForever()
+                .start();
+        }
         
         const labelNode = new Node('Label');
         node.addChild(labelNode);
@@ -179,7 +255,7 @@ export class MapScene extends Component {
             node.on(Node.EventType.TOUCH_END, () => this.onNodeClick(index), this);
             
             node.on(Node.EventType.MOUSE_ENTER, () => {
-                tween(node).to(0.1, { scale: new Vec3(1.1, 1.1, 1) }).start();
+                tween(node).to(0.1, { scale: new Vec3(1.15, 1.15, 1) }).start();
             }, this);
             node.on(Node.EventType.MOUSE_LEAVE, () => {
                 tween(node).to(0.1, { scale: new Vec3(1, 1, 1) }).start();
@@ -225,6 +301,15 @@ export class MapScene extends Component {
         this.mapNodes[index].visited = true;
         this.currentNodeIndex = index;
 
+        // 播放点击动画
+        const nodeUI = this.nodeUIs[index];
+        if (nodeUI) {
+            tween(nodeUI)
+                .to(0.1, { scale: new Vec3(0.9, 0.9, 1) })
+                .to(0.1, { scale: new Vec3(1, 1, 1) })
+                .start();
+        }
+
         switch (nodeData.type) {
             case NodeType.BATTLE:
             case NodeType.ELITE:
@@ -249,6 +334,7 @@ export class MapScene extends Component {
             gameState.player.hp = Math.min(gameState.player.maxHp, gameState.player.hp + healAmount);
             console.log(`恢复${healAmount}点生命！`);
             this.updateStatusBar();
+            this.updateNodeVisuals();
         }
     }
 
@@ -261,5 +347,27 @@ export class MapScene extends Component {
             if (this.goldLabel) this.goldLabel.string = `💰 ${player.gold}`;
             if (this.floorLabel) this.floorLabel.string = `🏰 第${gameState.map.floor}层`;
         }
+    }
+
+    /**
+     * 更新节点视觉效果
+     */
+    private updateNodeVisuals(): void {
+        // 重新绘制连接线
+        this.drawConnections();
+        
+        // 更新节点UI
+        this.nodeUIs.forEach((nodeUI, index) => {
+            const sprite = nodeUI.getComponent(Sprite);
+            if (sprite) {
+                if (this.isNodeAccessible(index)) {
+                    sprite.color = this.getNodeColor(this.mapNodes[index].type);
+                } else if (this.mapNodes[index].visited) {
+                    sprite.color = new Color(100, 150, 100, 255); // 已访问 - 淡绿色
+                } else {
+                    sprite.color = new Color(80, 80, 80, 255); // 不可访问 - 灰色
+                }
+            }
+        });
     }
 }

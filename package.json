@@ -25,7 +25,7 @@
   "projectType": "javascript",
   "hasNativeCode": false,
   "android": {
-    "packageName": "com.enlightenment.game",
+    "packageName": "com.qimeng.game",
     "targetSdkVersion": 33,
     "minSdkVersion": 21
   },

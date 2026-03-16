@@ -3,7 +3,7 @@
  * 处理卡牌的显示、动画和交互
  */
 
-import { _decorator, Component, Node, Label, Sprite, Color, Vec3, tween, UITransform, EventTouch } from 'cc';
+import { _decorator, Component, Node, Label, Sprite, Color, Vec3, tween, UITransform, EventTouch, UIOpacity } from 'cc';
 import { CardType } from './GameState';
 import { CardDatabase, getCardTypeColor } from './CardDatabase';
 const { ccclass, property } = _decorator;
