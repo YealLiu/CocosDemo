@@ -69,7 +69,7 @@ export class BattleScene extends Component {
         // 背景
         const sprite = statusNode.addComponent(Sprite);
         sprite.color = new Color(40, 40, 60, 200);
-        sprite.type = Sprite.Type.SIMPLE;
+        sprite.type = 1; // SLICED
 
         // HP条
         this.playerHpBar = this.createProgressBar(statusNode, 'HPBar', 0, 40, new Color(200, 50, 50, 255));
@@ -98,7 +98,7 @@ export class BattleScene extends Component {
         // 背景
         const sprite = enemyNode.addComponent(Sprite);
         sprite.color = new Color(60, 40, 40, 200);
-        sprite.type = Sprite.Type.SIMPLE;
+        sprite.type = 1; // SLICED
 
         // 敌人名称
         this.enemyNameLabel = this.createLabel(enemyNode, 'EnemyName', '👹 黑暗奴仆', 0, 60, 32, new Color(255, 150, 150, 255));
@@ -136,8 +136,8 @@ export class BattleScene extends Component {
         const label = labelNode.addComponent(Label);
         label.string = '结束回合';
         label.fontSize = 28;
-        label.horizontalAlign = Label.HorizontalAlign.CENTER;
-        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.horizontalAlign = 1; // CENTER
+        label.verticalAlign = 1; // CENTER
         label.color = new Color(255, 255, 255, 255);
 
         // 点击事件
@@ -163,12 +163,12 @@ export class BattleScene extends Component {
         // 背景
         const sprite = logNode.addComponent(Sprite);
         sprite.color = new Color(30, 30, 30, 200);
-        sprite.type = Sprite.Type.SIMPLE;
+        sprite.type = 1; // SLICED
 
         // 日志标签
         this.battleLogLabel = this.createLabel(logNode, 'LogLabel', '战斗开始！', 0, 120, 20, new Color(200, 200, 200, 255));
-        this.battleLogLabel.overflow = Label.Overflow.SHRINK;
-        this.battleLogLabel.verticalAlign = Label.VerticalAlign.TOP;
+        this.battleLogLabel.overflow = 1; // SHRINK
+        this.battleLogLabel.verticalAlign = 0; // TOP
 
         console.log('[BattleScene] 战斗日志创建完成');
     }
@@ -196,8 +196,8 @@ export class BattleScene extends Component {
         const label = labelNode.addComponent(Label);
         label.string = '返回';
         label.fontSize = 28;
-        label.horizontalAlign = Label.HorizontalAlign.CENTER;
-        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.horizontalAlign = 1; // CENTER
+        label.verticalAlign = 1; // CENTER
         label.color = new Color(255, 255, 255, 255);
 
         button.node.on(Button.EventType.CLICK, () => {
@@ -251,8 +251,8 @@ export class BattleScene extends Component {
         const label = labelNode.addComponent(Label);
         label.string = text;
         label.fontSize = fontSize;
-        label.horizontalAlign = Label.HorizontalAlign.CENTER;
-        label.verticalAlign = Label.VerticalAlign.CENTER;
+        label.horizontalAlign = 1; // CENTER
+        label.verticalAlign = 1; // CENTER
         label.color = color;
 
         return label;
@@ -298,7 +298,7 @@ export class BattleScene extends Component {
                 .to(0.1, { scale: new Vec3(0.95, 0.95, 1) })
                 .to(0.1, { scale: new Vec3(1, 1, 1) })
                 .call(() => {
-                    this.battleSystem?.endPlayerTurn();
+                    this.battleSystem?.endTurn();
                 })
                 .start();
         }
@@ -320,10 +320,10 @@ export class BattleScene extends Component {
                 this.playerHpBar.progress = player.hp / player.maxHp;
             }
             if (this.playerEnergyLabel) {
-                this.playerEnergyLabel.string = `⚡ ${player.energy}/3`;
+                this.playerEnergyLabel.string = `⚡ 3/3`;
             }
             if (this.playerBlockLabel) {
-                this.playerBlockLabel.string = `🛡️ ${player.block || 0}`;
+                this.playerBlockLabel.string = `🛡️ 0`;
             }
         }
     }

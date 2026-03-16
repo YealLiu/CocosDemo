@@ -97,6 +97,8 @@ export class Player {
     relics: IRelicData[] = [];
     powers: IPowerData[] = [];
     floor: number = 1;
+    energy: number = 3;
+    block: number = 0;
 
     constructor(classId: string, classData: IClassData) {
         this.class = classId;
@@ -105,6 +107,8 @@ export class Player {
         this.hp = classData.maxHp;
         this.deck = [...classData.startingDeck];
         this.relics = [classData.relic];
+        this.energy = 3;
+        this.block = 0;
     }
 }
 
